@@ -309,6 +309,11 @@ class KeyboardPlayerPyGame(Player):
         # If game has started
         if self._state:
             # If in exploration stage
+
+            if keys[pygame.K_r]:
+            print(self.path_record)
+            cv2.waitKey(100)
+            
             if self._state[1] == Phase.EXPLORATION:
                 # TODO: could you employ any technique to strategically perform exploration instead of random exploration
                 # to improve performance (reach target location faster)?
@@ -325,10 +330,6 @@ class KeyboardPlayerPyGame(Player):
                         self.path_record.append(copy.deepcopy(self.one_path))
                     self.start_end_tracker = int(not(self.start_end_tracker))
                     cv2.waitKey(100)
-                    
-                    # if keys[pygame.K_e]:
-                    # print(self.path_record)
-                    # cv2.waitKey(100)
 
                 if self.capturing:
                     # Get full absolute save path
