@@ -33,6 +33,10 @@ class KeyboardPlayerPyGame(Player):
         self.codebook = pickle.load(open("codebook.pkl", "rb"))
         # Initialize database for storing VLAD descriptors of FPV
         self.database = []
+        
+        self.path_record = []
+        self.start_end_tracker = 0 #start = 0, end = 1
+        self.one_path = [0,0]
 
         self.capturing = False
 
@@ -314,6 +318,18 @@ class KeyboardPlayerPyGame(Player):
                 elif keys[pygame.K_e]:
                     self.capturing = False
                     print("Detecting e pressed")
+
+                    # if keys[pygame.K_q]:
+                    print(self.count)
+                    self.one_path[self.start_end_tracker] = self.count
+                    if(self.start_end_tracker):
+                        self.path_record.append(copy.deepcopy(self.one_path))
+                    self.start_end_tracker = int(not(self.start_end_tracker))
+                    cv2.waitKey(100)
+                    
+                    # if keys[pygame.K_e]:
+                    # print(self.path_record)
+                    # cv2.waitKey(100)
 
                 if self.capturing:
                     # Get full absolute save path
