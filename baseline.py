@@ -3,6 +3,7 @@ from vis_nav_game import Player, Action, Phase
 import pygame
 import cv2
 
+import copy
 import numpy as np
 import os
 import pickle
