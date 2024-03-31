@@ -34,6 +34,8 @@ class KeyboardPlayerPyGame(Player):
         # Initialize database for storing VLAD descriptors of FPV
         self.database = []
 
+        self.capturing = False
+
     def reset(self):
         # Reset the player state
         self.fpv = None
@@ -308,8 +310,10 @@ class KeyboardPlayerPyGame(Player):
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_w]:
                     self.capturing = True
+                    print("Detecting w pressed")
                 elif keys[pygame.K_e]:
                     self.capturing = False
+                    print("Detecting e pressed")
 
                 if self.capturing:
                     # Get full absolute save path
