@@ -305,20 +305,27 @@ class KeyboardPlayerPyGame(Player):
             if self._state[1] == Phase.EXPLORATION:
                 # TODO: could you employ any technique to strategically perform exploration instead of random exploration
                 # to improve performance (reach target location faster)?
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_w]:
+                    self.capturing = True
+                elif keys[pygame.K_e]:
+                    self.capturing = False
 
-                # Get full absolute save path
-                save_dir_full = os.path.join(os.getcwd(),self.save_dir)
-                save_path = save_dir_full + str(self.count) + ".jpg"
-                # Create path if it does not exist
-                if not os.path.isdir(save_dir_full):
-                    os.mkdir(save_dir_full)
-                # Save current FPV
-                cv2.imwrite(save_path, fpv)
+                if self.capturing:
+                    # Get full absolute save path
+                    save_dir_full = os.path.join(os.getcwd(),self.save_dir)
+                    save_path = save_dir_full + str(self.count) + ".jpg"
+                    # Create path if it does not exist
+                    if not os.path.isdir(save_dir_full):
+                        os.mkdir(save_dir_full)
+                    # Save current FPV
+                    cv2.imwrite(save_path, fpv)
 
-                # Get VLAD embedding for current FPV and add it to the database
-                VLAD = self.get_VLAD(self.fpv)
-                self.database.append(VLAD)
-                self.count = self.count + 1
+                    # Get VLAD embedding for current FPV and add it to the database
+                    VLAD = self.get_VLAD(self.fpv)
+                    self.database.append(VLAD)
+                    self.count = self.count + 1
+                    
             # If in navigation stage
             elif self._state[1] == Phase.NAVIGATION:
                 # TODO: could you do something else, something smarter than simply getting the image closest to the current FPV?
