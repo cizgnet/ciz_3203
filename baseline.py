@@ -309,7 +309,8 @@ class KeyboardPlayerPyGame(Player):
         # If game has started
         if self._state:
             # If in exploration stage
-
+            
+            keys = pygame.key.get_pressed()
             if keys[pygame.K_r]:
                 print(self.path_record)
                 cv2.waitKey(100)
