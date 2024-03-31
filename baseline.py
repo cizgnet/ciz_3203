@@ -311,8 +311,8 @@ class KeyboardPlayerPyGame(Player):
             # If in exploration stage
 
             if keys[pygame.K_r]:
-            print(self.path_record)
-            cv2.waitKey(100)
+                print(self.path_record)
+                cv2.waitKey(100)
             
             if self._state[1] == Phase.EXPLORATION:
                 # TODO: could you employ any technique to strategically perform exploration instead of random exploration
