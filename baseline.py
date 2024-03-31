@@ -311,6 +311,7 @@ class KeyboardPlayerPyGame(Player):
             # If in exploration stage
             
             keys = pygame.key.get_pressed()
+
             if keys[pygame.K_r]:
                 print(self.path_record)
                 cv2.waitKey(100)
@@ -324,13 +325,19 @@ class KeyboardPlayerPyGame(Player):
                 elif keys[pygame.K_e]:
                     self.capturing = False
 
-                    # if keys[pygame.K_q]:
+                if keys[pygame.K_d]:
+                    tree = BallTree(self.database, leaf_size=60)
+                    self.tree = tree
+                    index = self.get_neighbor(self.fpv)
+                    print("your are current at image " + str(index))
+
+                if(keys[pygame.K_w] or keys[pygame.K_e]):
                     print(self.count)
                     self.one_path[self.start_end_tracker] = self.count
                     if(self.start_end_tracker):
                         self.path_record.append(copy.deepcopy(self.one_path))
                     self.start_end_tracker = int(not(self.start_end_tracker))
-                    cv2.waitKey(100)
+                    cv2.waitKey(500)
 
                 if self.capturing:
                     # Get full absolute save path
